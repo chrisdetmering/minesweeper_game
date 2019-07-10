@@ -2,13 +2,8 @@ require_relative 'tile'
 
 
 class Board 
-#9x9 board 
-#filled with bombs 
-#and none bombs
+@board = Array.new(9) {Array.new(9)}
 
-
-#methods 
-#render board
 
 
 
