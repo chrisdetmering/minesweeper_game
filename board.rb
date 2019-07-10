@@ -8,7 +8,7 @@ class Board
         Array.new(9) {Array.new(9)}
     end 
 
-    def self.add_bombs 
+    def self.add_tiles
     end 
 
 
