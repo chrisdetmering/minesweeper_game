@@ -2,21 +2,20 @@ require_relative 'tile'
 
 
 class Board 
-    
-    
+
+    attr_reader :grid
+
     def self.empty_grid
-        Array.new(9) {Array.new(9)}
-    end 
-
-    def self.add_tiles
-    end 
-
-
-    def initialize(grid = self.empty_grid
-    @gid = grid
+        Array.new(9) do 
+            Array.new(9) {Tile.new(0)}
+        end 
     end 
 
 
+    def initialize(grid = self.empty_grid)
+        @grid = grid
+    end 
 
-
+  
 end 
+
