@@ -17,6 +17,7 @@ class Minesweeper
     end 
 
     def clear(pos)
+        que = []
 
         
     end 
@@ -30,7 +31,8 @@ end
 game = Minesweeper.fill_board
 game.board.place_bombs
 game.board.give_tiles_grid
-
+game.board.grid[1][1].neighbors
+game.board.grid[1][1].neighbor_bomb_count
 
 game.board.render
 

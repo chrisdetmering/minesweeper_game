@@ -4,7 +4,7 @@ class Tile
 
     def initialize(board, position)
         @board = board
-        @revealed = false
+        @revealed = true
         @value = '_'
         @bomb = false 
         @position = position
@@ -40,9 +40,12 @@ class Tile
 
         x, y = @position
 
-        (x - 1..x + 1).each do |x| 
-            (y - 1..y + 1).each do |y| 
-                tile = @board[x][y]
+        (x - 1..x + 1).each do |i| 
+            (y - 1..y + 1).each do |j| 
+                
+                next if [i, j] == [x, y]
+                
+                tile = @board[i][j]
 
                 if tile != nil 
                     neighbors << tile
@@ -63,7 +66,7 @@ class Tile
         end 
     
 
-       bomb_count > 0 ? @value = "#{bomb_count}" : @value 
+    @value = "#{bomb_count}"
     end 
 
     def inspect 
