@@ -1,6 +1,5 @@
 require_relative 'tile'
 
-
 class Board 
 
     attr_reader :grid
@@ -22,13 +21,19 @@ class Board
         @grid.map{|row| row.map {|tile| tile.board = @grid}}
     end 
 
+
     def place_bombs
         bombs = 0 
 
         until bombs == 10 
-            tile = @grid[rand(0..8)][rand(0..8)]
-            tile.bomb_setter
-            bombs +=1 
+            row = rand(0..8)
+            col = rand(0..8)
+
+            tile = @grid[row][col]
+            if tile.value != "B"
+                tile.bomb_setter
+                bombs +=1 
+            end
         end
     end 
 

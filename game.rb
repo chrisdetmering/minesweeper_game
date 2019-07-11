@@ -16,6 +16,10 @@ class Minesweeper
         @board = board
     end 
 
+    def clear(pos)
+
+        
+    end 
     
 
 
@@ -27,7 +31,7 @@ game = Minesweeper.fill_board
 game.board.place_bombs
 game.board.give_tiles_grid
 
+
 game.board.render
 
-p game.board.grid[1][1]
 
