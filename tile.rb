@@ -9,7 +9,7 @@ class Tile
         @bomb = false 
     end 
 
-    attr_accessor :bomb, :revealed
+    attr_accessor :bomb, :revealed, :board
 
 
     def bomb_setter
@@ -30,10 +30,9 @@ class Tile
     end 
 
   
-    def neighbor_bomb_count
-
+    def board=(value)
+        @board = value
     end 
-
 
 
 

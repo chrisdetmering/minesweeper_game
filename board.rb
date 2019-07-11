@@ -7,7 +7,7 @@ class Board
 
     def self.fill_board
        board = Array.new(9) do 
-            Array.new(9) {Tile.new(self)}
+            Array.new(9) {Tile.new(0)}
         end 
 
         self.new(board)
@@ -18,7 +18,11 @@ class Board
         @grid = grid
     end 
 
-    def bomb
+    def give_tiles_grid
+        @grid.map{|row| row.map {|tile| tile.board = @grid}}
+    end 
+
+    def place_bombs
         bombs = 0 
 
         until bombs == 10 
@@ -26,12 +30,6 @@ class Board
             tile.bomb_setter
             bombs +=1 
         end
-    end 
-
-    def reveal(position)
-        x, y = position
-        tile = @grid[x][y]
-        tile.revealed
     end 
 
     def render
