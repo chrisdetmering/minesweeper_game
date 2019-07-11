@@ -6,8 +6,8 @@ class Board
     attr_reader :grid
 
     def self.fill_board
-       board = Array.new(9) do 
-            Array.new(9) {Tile.new(0)}
+       board = Array.new(9) do |i|
+            Array.new(9) {|j| Tile.new(0, [i, j])}
         end 
 
         self.new(board)

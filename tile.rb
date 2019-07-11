@@ -2,11 +2,12 @@
 class Tile 
 
 
-    def initialize(board)
+    def initialize(board, position)
         @board = board
         @revealed = false
         @value = ' '
         @bomb = false 
+        @position = position
     end 
 
     attr_accessor :bomb, :revealed, :board
@@ -29,10 +30,14 @@ class Tile
          @revealed = true
     end 
 
-  
     def board=(value)
         @board = value
     end 
+
+    def inspect 
+         "#{@position}, #{@bomb}, #{@revealed},#{@value}"
+    end 
+
 
 
 
