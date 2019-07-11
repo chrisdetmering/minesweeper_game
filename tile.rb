@@ -4,23 +4,35 @@ class Tile
 
     def initialize(board)
         @board = board
+        @revealed = false
+        @value = ' '
         @bomb = false 
     end 
 
-    attr_reader :bomb
+    attr_accessor :bomb, :revealed
 
-#bomb? T/F
 
     def bomb_setter
         @bomb = true
+        @value = 'B'
     end 
 
+    def to_s 
+       if @revealed == false
+            return "*"
+       else 
+            return @value
+       end 
+    end 
 
-#methods 
-#reveal 
-#neighbors 
-#neighbor_bomb_count
-#flagged? 
+    def revealed 
+         @revealed = true
+    end 
+
+  
+    def neighbor_bomb_count
+
+    end 
 
 
 

@@ -2,7 +2,7 @@ require_relative 'tile'
 require_relative 'board'
 
 
-class PlayMinesweeper 
+class Minesweeper 
 
     attr_accessor :board
 
@@ -16,22 +16,16 @@ class PlayMinesweeper
         @board = board
     end 
 
-    def bomb
-        bombs = 0 
+    
 
-        until bombs == 10 
-            tile = @board[rand(0..8)][rand(0..8)]
-            tile.bomb_setter
-            bombs +=1 
-        end
-    end 
 
 
 end 
 
 
-game = PlayMinesweeper.fill_board
+game = Minesweeper.fill_board
 
-game.bomb
+game.board.bomb
+game.board.reveal([1, 1])
+game.board.render
 
-p game
