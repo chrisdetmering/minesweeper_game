@@ -19,22 +19,42 @@ class Minesweeper
         @board.place_bombs
         @board.give_tiles_grid
 
-        until over? 
-            @board.render
-            prompt
-
-            system('clear')
-        end 
-
-        puts "You Won!"
+        play_turn until over? 
+            board.render
+            puts "You Won!"
     end 
 
-    def prompt 
-        puts "Please enter a spot you would like to choose e.g. 3,4"
-
-        pos = coord(gets.chomp)
+    def play_turn 
+        board.render
+        pos = get_pos
         flag_or_clear(pos)
+       
+        system("clear")
     end 
+
+
+    def get_pos
+        pos = nil
+
+        until pos && valid_pos?(pos)
+            puts "Please enter a coordinate e.g. 3,4"
+            print ">"
+
+            begin 
+                pos = coords(gets.chomp)
+            rescue 
+                puts "Invalid position you entered!"
+                puts ""
+
+                pos = nil
+            end 
+        end 
+        pos 
+    end 
+
+
+
+
 
     def flag_or_clear(pos)
         puts "would you like to flag that spot? y/n"
@@ -48,18 +68,22 @@ class Minesweeper
         elsif tile.bomb 
             puts "You lose!"
             sleep(2)
-            
+
         elsif tile.flagged?
             tile.unflag
 
-        else 
+        elsif ans == 'n'
             clear(pos)
 
         end
     end 
 
-    def coord(string)
-        string.split(",").map(&:to_i)
+    def coords(string)
+        string.split(",").map {|char| Integer(char)}
+    end 
+
+    def valid_pos?(pos)
+        pos.all? {|x| x.between?(0, board.grid.size - 1)}
     end 
 
     def tile(pos)

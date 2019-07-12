@@ -46,19 +46,23 @@ class Board
 
     def won? 
 
+        flagged = 0 
+        revealed_tiles = 0 
+
+
         @grid.each do |row| 
             row.each do |tile| 
-                if tile.bomb && !tile.flagged
+                if tile.bomb && tile.flagged? 
+                    flagged +=1 
+
+                elsif tile.revealed? 
                     
-                    return false
-                elsif !tile.revealed?
-                    
-                    return false
+                    revealed_tiles +=1
                 end
             end 
         end 
 
-        true
-    end 
+        flagged == 10 && revealed_tiles == 71
+    end    
 end 
 
