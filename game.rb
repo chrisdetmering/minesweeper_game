@@ -15,10 +15,24 @@ class Minesweeper
         @board = board
     end 
 
-    def prompt 
-        puts "Please enter a spot like to choose e.g. 3,4"
+    def play 
+        @board.place_bombs
+        @board.give_tiles_grid
 
-        pos = gets.chomps.split(',')
+        until over? 
+            @board.render
+            prompt
+
+            system('clear')
+        end 
+
+        puts "You Won!"
+    end 
+
+    def prompt 
+        puts "Please enter a spot you would like to choose e.g. 3,4"
+
+        pos = coord(gets.chomp)
         flag_or_clear(pos)
     end 
 
@@ -28,16 +42,20 @@ class Minesweeper
 
         ans = gets.chomp
 
-        if ans == 'y'
+        if ans == 'y' && !tile.revealed?
             tile.flagged 
 
         elsif tile.bomb 
             puts "You lose!"
-    
+            
         else 
             clear(pos)
 
         end
+    end 
+
+    def coord(string)
+        string.split(",").map(&:to_i)
     end 
 
     def tile(pos)
@@ -48,7 +66,7 @@ class Minesweeper
 
     def clear(pos)
     
-        tile = tile(pose)
+        tile = tile(pos)
         
         seen = {}
         queue = [tile]
@@ -74,15 +92,12 @@ class Minesweeper
         end 
     end 
 
+    def over? 
+        @board.won? 
+    end 
 
 end 
 
 
 game = Minesweeper.fill_board
-game.board.place_bombs
-game.board.give_tiles_grid
-game.clear([1, 1])
-game.board.render
-
-
-
+game.play

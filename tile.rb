@@ -6,12 +6,12 @@ class Tile
         @board = board
         @revealed = false
         @value = ' '
-        @falgged = false
+        @flagged = false
         @bomb = false 
         @position = position
     end 
 
-    attr_accessor :bomb, :board, :value,
+    attr_accessor :bomb, :board, :value
     attr_reader :position
 
 
