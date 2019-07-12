@@ -26,20 +26,22 @@ class Minesweeper
         until queue.empty? 
             ele = queue.shift 
 
-            next if ele.bomb
-            ele.revealed
+        
+            if ele.bomb_count.to_i > 0
+                ele.revealed
+                seen[ele] = true
 
-            seen[ele] = true 
-            ele.neighbors.each do |child| 
-                
-                if !revealed.include?(child)
-                    queue << child 
+            else
+                ele.revealed
+                seen[ele] = true 
+
+                ele.neighbors.each do |child| 
+                    if !seen.include?(child)
+                        queue << child 
+                    end
                 end
-
             end 
-            
         end 
-
     end 
 
 

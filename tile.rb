@@ -52,7 +52,7 @@ class Tile
       
     end 
 
-    def neighbor_bomb_count
+    def bomb_count
         bomb_count = 0 
 
         neighbors.each do |tile| 
@@ -61,8 +61,11 @@ class Tile
             end 
         end 
     
-
-        @value = "#{bomb_count}"
+        if bomb_count == 0 
+            @value = " "
+        else 
+           @value = "#{bomb_count}"
+        end 
     end 
 
     def inspect 
