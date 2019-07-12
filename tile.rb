@@ -5,7 +5,7 @@ class Tile
     def initialize(board, position)
         @board = board
         @revealed = true
-        @value = '_'
+        @value = ' '
         @bomb = false 
         @position = position
     end 
@@ -35,25 +35,23 @@ class Tile
         @board = value
     end 
 
-    def neighbors    
-        neighbors = []
+    def neighbors  
 
-        x, y = @position
+        def adjacent(array, row, col)
+            rows_ndx = array.each_index.select { |i| (i-row).abs < 2 }
+            cols_ndx = array.first.size.times.select { |j| (j-col).abs < 2 }
+            rows_ndx.each_with_object([]) do |i,a| 
+            cols_ndx.each { |j| a << array[i][j] unless [i,j] == [row,col] }
+            end
+        end
 
-        (x - 1..x + 1).each do |i| 
-            (y - 1..y + 1).each do |j| 
-                
-                next if [i, j] == [x, y]
-                
-                tile = @board[i][j]
 
-                if tile != nil 
-                    neighbors << tile
-                end 
-            end 
-        end 
+       
+        row, col = @position
+        array = @board 
 
-       neighbors
+        return adjacent(array, row, col)
+      
     end 
 
     def neighbor_bomb_count
@@ -66,7 +64,7 @@ class Tile
         end 
     
 
-    @value = "#{bomb_count}"
+        @value = "#{bomb_count}"
     end 
 
     def inspect 
