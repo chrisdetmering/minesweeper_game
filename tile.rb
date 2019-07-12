@@ -11,7 +11,7 @@ class Tile
         @position = position
     end 
 
-    attr_accessor :bomb, :revealed, :board, :value,
+    attr_accessor :bomb, :board, :value,
     attr_reader :position
 
 
@@ -33,8 +33,12 @@ class Tile
     def flagged 
         @flagged = true
     end 
-    
-    def revealed 
+
+    def revealed? 
+        @revealed
+    end 
+
+    def reveal
          @revealed = true
     end 
 
@@ -56,7 +60,6 @@ class Tile
         array = @board 
 
         return adjacent(array, row, col)
-      
     end 
 
     def bomb_count
@@ -68,11 +71,7 @@ class Tile
             end 
         end 
     
-        if bomb_count == 0 
-            @value = " "
-        else 
-           @value = "#{bomb_count}"
-        end 
+        bomb_count == 0  ?  @value = " " :  @value = "#{bomb_count}"
     end 
 
     def inspect 

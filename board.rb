@@ -44,6 +44,21 @@ class Board
         end
     end 
 
-  
+    def won? 
+
+        @grid.each do |row| 
+            row.each do |tile| 
+                if tile.bomb && !tile.flagged
+                    
+                    return false
+                elsif !tile.revealed?
+                    
+                    return false
+                end
+            end 
+        end 
+
+        true
+    end 
 end 
 

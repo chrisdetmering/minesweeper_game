@@ -58,11 +58,11 @@ class Minesweeper
 
         
             if ele.bomb_count.to_i > 0
-                ele.revealed
+                ele.reveal
                 seen[ele] = true
 
             else
-                ele.revealed
+                ele.reveal
                 seen[ele] = true 
 
                 ele.neighbors.each do |child| 
