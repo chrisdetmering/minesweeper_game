@@ -15,10 +15,40 @@ class Minesweeper
         @board = board
     end 
 
+    def prompt 
+        puts "Please enter a spot like to choose e.g. 3,4"
+
+        pos = gets.chomps.split(',')
+        flag_or_clear(pos)
+    end 
+
+    def flag_or_clear(pos)
+        puts "would you like to flag that spot? y/n"
+        tile = tile(pos)
+
+        ans = gets.chomp
+
+        if ans == 'y'
+            tile.flagged 
+
+        elsif tile.bomb 
+            puts "You lose!"
+    
+        else 
+            clear(pos)
+
+        end
+    end 
+
+    def tile(pos)
+        x, y = pos
+        tile = board.grid[x][y]
+        tile 
+    end 
 
     def clear(pos)
-        x, y = pos 
-        tile = board.grid[x][y]
+    
+        tile = tile(pose)
         
         seen = {}
         queue = [tile]

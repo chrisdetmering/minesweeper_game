@@ -6,11 +6,12 @@ class Tile
         @board = board
         @revealed = false
         @value = ' '
+        @falgged = false
         @bomb = false 
         @position = position
     end 
 
-    attr_accessor :bomb, :revealed, :board, :value
+    attr_accessor :bomb, :revealed, :board, :value,
     attr_reader :position
 
 
@@ -22,11 +23,17 @@ class Tile
     def to_s 
        if @revealed == false
             return "*"
+       elsif @flagged == true 
+            return "F"
        else 
             return @value
        end 
     end 
 
+    def flagged 
+        @flagged = true
+    end 
+    
     def revealed 
          @revealed = true
     end 
