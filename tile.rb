@@ -4,7 +4,7 @@ class Tile
 
     def initialize(board, position)
         @board = board
-        @revealed = true
+        @revealed = false
         @value = ' '
         @bomb = false 
         @position = position
@@ -45,8 +45,6 @@ class Tile
             end
         end
 
-
-       
         row, col = @position
         array = @board 
 

@@ -17,22 +17,30 @@ class Minesweeper
 
 
     def clear(pos)
-        queue = [pos]
+        x, y = pos 
+        tile = board.grid[x][y]
+        
+        seen = {}
+        queue = [tile]
 
         until queue.empty? 
             ele = queue.shift 
 
-            tile = @board.grid[ele[0]][ele[1]]
-            next if tile.bomb
-            tile.revealed
+            next if ele.bomb
+            ele.revealed
 
-            tile.neighbors.each {|child| queue << child.position}
+            seen[ele] = true 
+            ele.neighbors.each do |child| 
+                
+                if !revealed.include?(child)
+                    queue << child 
+                end
 
+            end 
+            
         end 
 
     end 
-    
-
 
 
 end 
@@ -41,7 +49,7 @@ end
 game = Minesweeper.fill_board
 game.board.place_bombs
 game.board.give_tiles_grid
-p game.board.grid[1][1].neighbors
+game.clear([1, 1])
 game.board.render
 
 
