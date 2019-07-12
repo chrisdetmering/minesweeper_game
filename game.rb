@@ -42,12 +42,16 @@ class Minesweeper
 
         ans = gets.chomp
 
-        if ans == 'y' && !tile.revealed?
+        if  ans == 'y'
             tile.flagged 
 
         elsif tile.bomb 
             puts "You lose!"
+            sleep(2)
             
+        elsif tile.flagged?
+            tile.unflag
+
         else 
             clear(pos)
 
@@ -74,7 +78,8 @@ class Minesweeper
         until queue.empty? 
             ele = queue.shift 
 
-        
+            next if ele.flagged?
+
             if ele.bomb_count.to_i > 0
                 ele.reveal
                 seen[ele] = true

@@ -1,3 +1,5 @@
+require 'byebug'
+
 
 class Tile 
 
@@ -21,17 +23,27 @@ class Tile
     end 
 
     def to_s 
-       if @revealed == false
-            return "*"
-       elsif @flagged == true 
+    
+        
+       if @flagged && !@revealed
             return "F"
+       elsif !@revealed 
+            return "*"
        else 
             return @value
        end 
     end 
 
+    def flagged? 
+        @flagged
+    end 
+
     def flagged 
         @flagged = true
+    end 
+
+    def unflag 
+        @flagged = false
     end 
 
     def revealed? 
