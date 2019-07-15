@@ -15,6 +15,7 @@ class Board
 
     def initialize(grid = self.fill_board)
         @grid = grid
+        @bombs = []
     end 
 
     def give_tiles_grid
@@ -31,10 +32,12 @@ class Board
 
             tile = @grid[row][col]
             if tile.value != "B"
+                @bombs << tile
                 tile.bomb_setter
                 bombs +=1 
             end
         end
+
     end 
 
     def render
@@ -57,5 +60,11 @@ class Board
 
         count == 71
     end    
+
+    def show_all_bombs 
+        @bombs.each do |bomb| 
+            bomb.reveal
+        end 
+    end  
 end 
 

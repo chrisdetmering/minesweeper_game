@@ -23,8 +23,6 @@ class Tile
     end 
 
     def to_s 
-    
-        
        if @flagged && !@revealed
             return "F"
        elsif !@revealed 

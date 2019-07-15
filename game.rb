@@ -13,15 +13,19 @@ class Minesweeper
 
     def initialize(board)
         @board = board
+        @lost = false
     end 
 
     def play 
         @board.place_bombs
         @board.give_tiles_grid
 
-        play_turn until won? 
+        play_turn until (won? || lost?)
             board.render
-            puts "You Won!"
+            
+           if won? 
+            puts "You won!"
+           end 
     end 
 
     def play_turn 
@@ -63,12 +67,15 @@ class Minesweeper
         if  ans == 'y'
             tile.flagged 
 
-        elsif tile.bomb 
-            puts "You lose!"
-            sleep(2)
-
         elsif tile.flagged?
             tile.unflag
+        
+        elsif tile.bomb
+            system('clear')
+            
+            puts 'You lose!'
+            sleep(2)
+            lost
 
         elsif ans == 'n'
             clear(pos)
@@ -121,6 +128,14 @@ class Minesweeper
 
     def won? 
         @board.won? 
+    end 
+
+    def lost? 
+        @lost
+    end 
+
+    def lost
+        @lost = true
     end 
 
 end 
