@@ -49,7 +49,7 @@ class Minesweeper
             rescue 
                 puts "Invalid position you entered!"
                 puts ""
-
+                sleep(2)
                 pos = nil
             end 
         end 
@@ -71,10 +71,6 @@ class Minesweeper
             tile.unflag
         
         elsif tile.bomb
-            system('clear')
-            
-            puts 'You lose!'
-            sleep(2)
             lost
 
         elsif ans == 'n'
@@ -135,6 +131,11 @@ class Minesweeper
     end 
 
     def lost
+        system('clear')
+        board.show_all_bombs 
+        board.render
+        puts 'You lose!'
+        sleep(2)
         @lost = true
     end 
 
