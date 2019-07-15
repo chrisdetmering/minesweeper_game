@@ -19,7 +19,7 @@ class Minesweeper
         @board.place_bombs
         @board.give_tiles_grid
 
-        play_turn until over? 
+        play_turn until won? 
             board.render
             puts "You Won!"
     end 
@@ -51,8 +51,6 @@ class Minesweeper
         end 
         pos 
     end 
-
-
 
 
 
@@ -121,7 +119,7 @@ class Minesweeper
         end 
     end 
 
-    def over? 
+    def won? 
         @board.won? 
     end 
 
